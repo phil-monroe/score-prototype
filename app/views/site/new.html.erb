@@ -1,0 +1,9 @@
+Welcome. 
+
+Please sign in.
+
+<%= form_tag login_path do -%>
+	<%= select_tag :user_type, options_for_select(["Recruiter", "Candidate"]), :include_blank => false  %>
+	<%= text_field_tag :name %>
+	<%= submit_tag :submit %>
+<% end -%>

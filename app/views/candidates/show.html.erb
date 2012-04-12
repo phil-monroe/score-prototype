@@ -1,3 +1,6 @@
-<%= @candidate.name %> - <%= @candidate.score %>
-<br/>
-Add buttons here.
+<div id="candidate" data-json="<%= @candidate.to_json %>">
+  <%= @candidate.name %> - <%= @candidate.score %>
+</div>
+<div id="actions">
+  Add buttons here
+</div>

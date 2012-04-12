@@ -5,7 +5,15 @@ task :score => :environment do
   maxs = get_pillar_maxs
   puts "pillar maxs = #{maxs}"
 
-
+  Candidate.all.each do |candidate|
+    scores = {}
+    Pillar.all.each do |pillar|
+      scores[pillar.id] = weights[pillar.id] * Event.total_recent_activity(candidate, pillar) / maxs[pillar.id] if maxs[pillar.id] > 0
+    end
+    candidate.score = scores.values.sum
+    puts "#{candidate.id} -> #{scores} => #{candidate.score}"
+    candidate.save!
+  end
 end
 
 def get_pillar_maxs
@@ -16,7 +24,7 @@ def get_pillar_maxs
     Candidate.all.each do |candidate|
       activity = {}
       pillars.each do |pillar|
-        activity[pillar.id] = Event.by(candidate).in_pillar(pillar).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum']
+        activity[pillar.id] = Event.total_recent_activity(candidate, pillar)
         maxs[pillar.id] = activity[pillar.id] if maxs[pillar.id] < activity[pillar.id]
       end
       puts "#{candidate.id} -> #{activity}"
@@ -27,7 +35,7 @@ end
 def calc_pillar_wrights
   counts = {}.tap do |hash|
     Pillar.all.each do |pillar|
-      hash[pillar.id] = Event.by(Recruiter).in_pillar(pillar).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum'] if pillar.weight.nil?
+      hash[pillar.id] = Event.total_recent_activity(Recruiter, pillar) if pillar.weight.nil?
     end
   end
   puts "recruiter counts = #{counts}"
@@ -49,6 +57,7 @@ def calc_pillar_wrights
   weights.tap do |hash|
     Pillar.all.each do |pillar|
       hash[pillar.id] = (tot > 0 ? counts[pillar.id]*total_weight/tot : total_weight/dynamic_pillars) if pillar.weight.nil?
+      hash[pillar.id] /= 100
     end
   end
 end

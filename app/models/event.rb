@@ -10,4 +10,8 @@ class Event < ActiveRecord::Base
     end
   }
   scope :in_pillar, lambda {|pillar| joins(:available_event).where("available_events.pillar_id = #{pillar.id}") }
+
+  def self.total_activity who, pillar
+    self.by(who).in_pillar(pillar).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum']
+  end
 end

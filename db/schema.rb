@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412040048) do
+ActiveRecord::Schema.define(:version => 20120412152633) do
 
   create_table "available_events", :force => true do |t|
     t.string   "user_type"
@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20120412040048) do
     t.integer  "weight"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "raw_score_histories", :force => true do |t|
+    t.integer  "candidate_id"
+    t.float    "score"
+    t.string   "pillars"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "recruiters", :force => true do |t|

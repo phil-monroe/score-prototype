@@ -1,12 +1,33 @@
 task :score => :environment do
   weights = calc_pillar_wrights
   puts "recruiter weights = #{weights}"
+
+  maxs = get_pillar_maxs
+  puts "pillar maxs = #{maxs}"
+
+
+end
+
+def get_pillar_maxs
+  pillars = Pillar.all
+  maxs = {}
+  pillars.each{|pillar| maxs[pillar.id] = 0}
+  maxs.tap do |maxs|
+    Candidate.all.each do |candidate|
+      activity = {}
+      pillars.each do |pillar|
+        activity[pillar.id] = Event.by(candidate).in_pillar(pillar).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum']
+        maxs[pillar.id] = activity[pillar.id] if maxs[pillar.id] < activity[pillar.id]
+      end
+      puts "#{candidate.id} -> #{activity}"
+    end
+  end
 end
 
 def calc_pillar_wrights
   counts = {}.tap do |hash|
     Pillar.all.each do |pillar|
-      hash[pillar.id] = Event.by(Recruiter).in_pillar(pillar).select("available_events.multiplier").map{|r| r.attributes['multiplier'].to_f}.sum if pillar.weight.nil?
+      hash[pillar.id] = Event.by(Recruiter).in_pillar(pillar).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum'] if pillar.weight.nil?
     end
   end
   puts "recruiter counts = #{counts}"

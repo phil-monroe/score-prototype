@@ -10,4 +10,6 @@ $(function(){
 	
 	var cand_view = new CandidateView({model: candidate});
 	var availEventsView = new AvailableEventsView({collection: availableEvents, user: candidate});
+	
+	$.plot($("#score-history"), [ [[0, 0], [1, 1]] ], { yaxis: { max: 1 } });
 });

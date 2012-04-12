@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require jquery.flot
+//= jquery.flot.stack
 //= require_tree ../templates/
 //= require_tree ./models
 //= require_tree ./collections

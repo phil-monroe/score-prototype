@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411194130) do
+ActiveRecord::Schema.define(:version => 20120412040048) do
 
   create_table "available_events", :force => true do |t|
     t.string   "user_type"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(:version => 20120411194130) do
     t.float    "multiplier", :default => 1.0
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "calculation_time_histories", :force => true do |t|
+    t.datetime "time"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "candidates", :force => true do |t|

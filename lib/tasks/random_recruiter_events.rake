@@ -9,3 +9,14 @@ task :random_recruiter_events => :environment do
     r.times{Event.new(user: rme, available_event: ae).save}
   end
 end
+
+task :random_candidate_events => :environment do
+  10.times do
+    me = Candidate.new(name:"New Candidate")
+    me.save!
+    AvailableEvent.where(:user_type => Candidate).all.each do |ae|
+      r = rand(30)
+      r.times{Event.new(user: me, available_event: ae).save}
+    end
+  end
+end

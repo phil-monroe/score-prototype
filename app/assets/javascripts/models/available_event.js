@@ -1,5 +1,5 @@
 $(function() {
-	Candidate = Backbone.Model.extend({
+	AvailableEvent = Backbone.Model.extend({
 		name: 'Candidate',
 
 		urlRoot: '/candidates',

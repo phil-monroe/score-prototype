@@ -1,0 +1,1 @@
+<button><%= @event.get('event_name') %></button>

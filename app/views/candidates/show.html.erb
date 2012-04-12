@@ -1,6 +1,10 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'candidate' %>
+<% end %>
+
 <div id="candidate" data-json="<%= @candidate.to_json %>">
-  <%= @candidate.name %> - <%= @candidate.score %>
+  <%= @candidate.name %> - <span id="score"><%= @candidate.score %></span>
 </div>
-<div id="actions">
-  Add buttons here
-</div>
+<ul id="available_events">
+  loading...
+</ul>

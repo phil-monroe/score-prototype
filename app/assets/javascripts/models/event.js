@@ -1,8 +1,8 @@
 $(function() {
-	Candidate = Backbone.Model.extend({
-		name: 'Candidate',
+	Event = Backbone.Model.extend({
+		name: 'Event',
 
-		urlRoot: '/candidates',
+		urlRoot: '/events',
 
 		inspect: function(){
 			alert(JSON.stringify(this.attributes));

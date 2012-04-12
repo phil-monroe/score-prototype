@@ -4,7 +4,7 @@ class CreateAvailableEvents < ActiveRecord::Migration
       t.string :user_type
       t.string :event_name
       t.integer :pillar_id
-      t.float :multiplier
+      t.float :multiplier, default: 1
 
       t.timestamps
     end

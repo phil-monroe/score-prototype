@@ -17,6 +17,7 @@ task :score, [:use_last_period] => [:environment] do |t, args|
       scores[pillar.id] = weights[pillar.id] * activity / maxs[pillar.id] if maxs[pillar.id] > 0
     end
     candidate.score = [scores.values.sum, 1.0].min
+    candidate.raw_score_histories.build(score: candidate.score, pillars: scores).save
     puts "#{candidate.id} -> #{scores} => #{candidate.score}"
     candidate.save!
   end

@@ -2,6 +2,12 @@ class Event < ActiveRecord::Base
   belongs_to :user, :polymorphic => true
   belongs_to :available_event
 
+	validates_presence_of :user_id
+	validates_presence_of :user_type
+	validates_presence_of :available_event_id
+	
+
+
   scope :by, lambda { |who|
     if who.is_a? Class
       where(:user_type => who)

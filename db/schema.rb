@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(:version => 20120411194130) do
     t.string   "user_type"
     t.string   "event_name"
     t.integer  "pillar_id"
-    t.float    "multiplier"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.float    "multiplier", :default => 1.0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "candidates", :force => true do |t|
@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(:version => 20120411194130) do
   create_table "events", :force => true do |t|
     t.string   "user_type"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "available_event_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "pillars", :force => true do |t|

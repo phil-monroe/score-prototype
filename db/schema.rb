@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20120412152633) do
   create_table "raw_score_histories", :force => true do |t|
     t.integer  "candidate_id"
     t.float    "score"
+    t.float    "raw_score"
     t.string   "pillars"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false

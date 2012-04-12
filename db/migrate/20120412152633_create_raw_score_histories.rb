@@ -3,6 +3,7 @@ class CreateRawScoreHistories < ActiveRecord::Migration
     create_table :raw_score_histories do |t|
       t.integer :candidate_id
       t.float :score
+      t.float :raw_score
       t.string :pillars
 
       t.timestamps

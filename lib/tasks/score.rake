@@ -1,4 +1,10 @@
 task :score, [:use_last_period] => [:environment] do |t, args|
+  #Constants that need admin in the final implementations
+  MAX_SCORE = 100
+  MIN_SCORE = 1
+  R_VAL = 0.15
+  P_VAL = 2.0
+
   CalculationTimeHistory.create(time: Time.now) unless args[:use_last_period]
 
   range = CalculationTimeHistory.last(2).map(&:time)
@@ -12,12 +18,14 @@ task :score, [:use_last_period] => [:environment] do |t, args|
 
   Candidate.active_in(range).each do |candidate|
     scores = {}
+    scores_unnormalized = {}
     Pillar.all.each do |pillar|
       activity = Event.total_activity(candidate, pillar, range)
-      scores[pillar.id] = weights[pillar.id] * activity / maxs[pillar.id] if maxs[pillar.id] > 0
+      scores[pillar.id] = scores_unnormalized[pillar.id] = maxs[pillar.id] > 0 ? weights[pillar.id] * activity / maxs[pillar.id] : 0
+      #scores[pillar.id] =(20.0 / (((1 + (20.0 / MIN_SCORE)) * (Math::E**(-R_VAL*scores_unnormalized[pillar.id])))**P_VAL))
     end
-    candidate.raw_score_histories.build(score: [scores.values.sum, 1.0].min, pillars: scores).save
-    puts "#{candidate.id} -> #{scores} => #{[scores.values.sum, 1.0].min}"
+    candidate.raw_score_histories.build(score: [scores.values.sum, MAX_SCORE].min, pillars: scores).save
+    puts "#{candidate.id} -> #{scores_unnormalized} -> #{scores} => #{[scores.values.sum, MAX_SCORE].min}"
   end
 
   AVERAGING_LENGTH = 5

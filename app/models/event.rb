@@ -17,7 +17,9 @@ class Event < ActiveRecord::Base
   }
   scope :in_pillar, lambda {|pillar| joins(:available_event).where("available_events.pillar_id = #{pillar.id}") }
 
+  scope :between, lambda{|range| where(:created_at => (range.first..range.last))}
+
   def self.total_activity who, pillar, range
-    self.by(who).in_pillar(pillar).where(:created_at => (range[0]..range[1])).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum'] || 0
+    self.by(who).in_pillar(pillar).between(range).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum'] || 0
   end
 end

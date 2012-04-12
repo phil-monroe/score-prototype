@@ -11,8 +11,8 @@ task :random_recruiter_events => :environment do
 end
 
 task :random_candidate_events => :environment do
-  10.times do
-    me = Candidate.new(name:"New Candidate")
+  (1..10).each do |id|
+    me = Candidate.find(id) rescue Candidate.new(name:"New Candidate")
     me.save!
     AvailableEvent.where(:user_type => Candidate).all.each do |ae|
       r = rand(30)
@@ -20,3 +20,5 @@ task :random_candidate_events => :environment do
     end
   end
 end
+
+task :simulate_cycle => [:environment, :random_recruiter_events, :random_candidate_events, :score]

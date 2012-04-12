@@ -10,8 +10,24 @@ def calc_pillar_wrights
     end
   end
   puts "recruiter counts = #{counts}"
+
   tot = counts.values.sum
-  weights = {}.tap{|hash| Pillar.all.each{|pillar| hash[pillar.id] = pillar.weight unless  pillar.weight.nil?}}
+  dynamic_pillars = 0
+
+  weights = {}.tap do |hash|
+    Pillar.all.each do |pillar|
+      pillar.weight.nil? ?
+          dynamic_pillars+=1 :
+          hash[pillar.id] = pillar.weight
+    end
+  end
+
   total_weight = 100 - weights.values.sum
-  weights.tap{|hash| Pillar.all.each{|pillar| hash[pillar.id] = counts[pillar.id]*total_weight/tot if pillar.weight.nil?}}
+
+  # Note: if recruiters have had no activity during the period the distribution is equal
+  weights.tap do |hash|
+    Pillar.all.each do |pillar|
+      hash[pillar.id] = (tot > 0 ? counts[pillar.id]*total_weight/tot : total_weight/dynamic_pillars) if pillar.weight.nil?
+    end
+  end
 end

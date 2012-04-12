@@ -8,7 +8,7 @@ $(function(){
 	  candidate.fetch();
 		availableEvents.fetch({data: {user_type: candidate.name}});
     rawScoreHistories.fetch();
-	}, 10000);
+	}, 1000);
 	
 	var cand_view = new CandidateView({model: candidate});
 	var availEventsView = new AvailableEventsView({collection: availableEvents, user: candidate});

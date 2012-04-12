@@ -1,3 +1,3 @@
 class Recruiter < ActiveRecord::Base
-  has_many :events, as: :recruiter
+  has_many :events, as: :user
 end

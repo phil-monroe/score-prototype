@@ -1,0 +1,10 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'recruiter' %>
+<% end %>
+
+<div id="recruiter" data-json="<%= @recruiter.to_json %>">
+  <%= @recruiter.name %>
+</div>
+<ul id="available_events">
+  loading...
+</ul>

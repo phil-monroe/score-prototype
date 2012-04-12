@@ -11,13 +11,13 @@ var AvailableEventsView = Backbone.View.extend({
 	},
 	
 	appendEntry: function(entry){
-		var view = new AvailableEventView({model: entry});
+		var view = new AvailableEventView({model: entry, user_type: this.options.user_type});
 		$('#available_events').append(view.render().el);
 	},
 
   render: function() {
 		$(this.el).empty();
-		this.collection.each(this.appendEntry);
+		_.each(this.collection.models, this.appendEntry, this);
     return this;
   }
 });

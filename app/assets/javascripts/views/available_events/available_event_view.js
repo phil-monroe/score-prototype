@@ -14,7 +14,7 @@ var AvailableEventView = Backbone.View.extend({
 		var event = new Event({
 			available_event_id: this.model.id,
 			user_id: 1,
-			user_type: 'Candidate'
+			user_type: this.options.user_type
 			});
 		event.save({wait: true});
 		alert("Submitting " + this.model.get('event_name'));

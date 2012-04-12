@@ -15,3 +15,4 @@ end
 gem 'jquery-rails'
 gem 'backbone-on-rails'
 gem "flot-rails"
+gem "active_scaffold"

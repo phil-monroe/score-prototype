@@ -21,8 +21,8 @@ task :score, [:use_last_period] => [:environment] do |t, args|
     scores_unnormalized = {}
     Pillar.all.each do |pillar|
       activity = Event.total_activity(candidate, pillar, range)
-      scores[pillar.id] = scores_unnormalized[pillar.id] = maxs[pillar.id] > 0 ? weights[pillar.id] * activity / maxs[pillar.id] : 0
-      #scores[pillar.id] =(20.0 / (((1 + (20.0 / MIN_SCORE)) * (Math::E**(-R_VAL*scores_unnormalized[pillar.id])))**P_VAL))
+      scores[pillar.name] = scores_unnormalized[pillar.name] = maxs[pillar.name] > 0 ? weights[pillar.name] * activity / maxs[pillar.name] : 0
+      #scores[pillar.name] =(20.0 / (((1 + (20.0 / MIN_SCORE)) * (Math::E**(-R_VAL*scores_unnormalized[pillar.name])))**P_VAL))
     end
     candidate.raw_score_histories.build(raw_score: [scores.values.sum, MAX_SCORE].min, pillars: scores).save
     puts "#{candidate.id} -> #{scores_unnormalized} -> #{scores} => #{[scores.values.sum, MAX_SCORE].min}"
@@ -43,13 +43,13 @@ end
 def get_pillar_maxs range
   pillars = Pillar.all
   maxs = {}
-  pillars.each{|pillar| maxs[pillar.id] = 0}
+  pillars.each{|pillar| maxs[pillar.name] = 0}
   maxs.tap do |maxs|
     Candidate.all.each do |candidate|
       activity = {}
       pillars.each do |pillar|
-        activity[pillar.id] = Event.total_activity(candidate, pillar, range)
-        maxs[pillar.id] = activity[pillar.id] if maxs[pillar.id] < activity[pillar.id]
+        activity[pillar.name] = Event.total_activity(candidate, pillar, range)
+        maxs[pillar.name] = activity[pillar.name] if maxs[pillar.name] < activity[pillar.name]
       end
       puts "#{candidate.id} -> #{activity}"
     end
@@ -59,7 +59,7 @@ end
 def calc_pillar_wrights range
   counts = {}.tap do |hash|
     Pillar.all.each do |pillar|
-      hash[pillar.id] = Event.total_activity(Recruiter, pillar, range) if pillar.weight.nil?
+      hash[pillar.name] = Event.total_activity(Recruiter, pillar, range) if pillar.weight.nil?
     end
   end
   puts "recruiter counts = #{counts}"
@@ -71,7 +71,7 @@ def calc_pillar_wrights range
     Pillar.all.each do |pillar|
       pillar.weight.nil? ?
           dynamic_pillars+=1 :
-          hash[pillar.id] = pillar.weight
+          hash[pillar.name] = pillar.weight
     end
   end
 
@@ -79,8 +79,8 @@ def calc_pillar_wrights range
   # Note: if recruiters have had no activity during the period the distribution is equal
   weights.tap do |hash|
     Pillar.all.each do |pillar|
-      hash[pillar.id] = (tot > 0 ? counts[pillar.id]*total_weight/tot : total_weight/dynamic_pillars) if pillar.weight.nil?
-      hash[pillar.id] /= 100.0
+      hash[pillar.name] = (tot > 0 ? counts[pillar.name]*total_weight/tot : total_weight/dynamic_pillars) if pillar.weight.nil?
+      hash[pillar.name] /= 100.0
     end
   end
 end

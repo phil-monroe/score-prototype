@@ -1,4 +1,6 @@
 $(function(){
+
+  window.myScore = Math.random()*85;
 	var candidate = new Candidate($('#candidate').data('json'));
 	var availableEvents = new AvailableEvents();
   var rawScoreHistories = new RawScoreHistories([], {candidate_id: candidate.id});

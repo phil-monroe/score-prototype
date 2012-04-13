@@ -14,17 +14,15 @@ $(function() {
     },
 
     raw_data: function(pillar){
-      var index = 0;
       var data = (_(this.models).map(function(model){
-              return [index++, model.get('pillars')[pillar]*100];
+              return [model.id, model.get('pillars')[pillar]*100];
             }));
       return {label: pillar, data: data};
     },
 
     average_data: function(){
-      var index = 0;
       var data = (_(this.models).map(function(model){
-              return [index++, model.get('score')*100];
+              return [model.id, window.myScore + model.get('score')*15];
             }));
       return [{label: "average", data: data}];
     },

@@ -5,9 +5,9 @@
 <div id="candidate" data-json="<%= @candidate.to_json %>">
   <%= @candidate.name %> - <span id="score"><%= @candidate.score %></span>
 </div>
-<ul id="available_events">
+<ul id="available_events" style="display: block; float: left; width: 40%;">
   loading...
 </ul>
 
-<div id="score-history" style="width:600px;height:300px"></div>
-<div id="avg-score-history" style="width:600px;height:300px"></div>
+<ul id="score-history" style="display: block; float: left; width: 40%;"></ul>
+<div id="avg-score-history" style="width:600px;height:300px; clear:both;"></div>

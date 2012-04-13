@@ -12,11 +12,17 @@ var RawScoreHistoryView = Backbone.View.extend({
   		            series: {
   		                stack: true,
   		                lines: { show: true, fill: true, steps: false }
-  		            }});
+  		            },
+                  yaxis: {
+                      max: 100
+                  }});
     $.plot($(this.el2), this.collection.average_data(), {
   		            series: {
   		                stack: true,
   		                lines: { show: true, fill: true, steps: false }
-  		            }});
+  		            },
+                  yaxis: {
+                      max: 100
+                  }});
   }
 });

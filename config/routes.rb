@@ -1,6 +1,7 @@
 ScoreProto::Application.routes.draw do
   resources :candidates do
     resources :raw_score_histories
+    resources :energy
   end
   resources :recruiters
 	resources :available_events

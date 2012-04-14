@@ -3,7 +3,7 @@ var AvailableEventView = Backbone.View.extend({
   template: window.JST['available_events/event'],
 
   events: {
-    "click":          "submitEvent",
+    "click":          "submitEvent"
   },
 
 	initialize: function() {
@@ -16,7 +16,9 @@ var AvailableEventView = Backbone.View.extend({
 			user_id: this.options.user.id,
 			user_type: this.options.user.name
 			});
-		event.save({wait: true});
+		event.save(null, {success: function(response){
+      console.log(response.attributes.energy);
+      window.energy.set({energy:response.attributes.energy});}});
 //		alert("Submitting " + this.model.get('event_name'));
 	},
 

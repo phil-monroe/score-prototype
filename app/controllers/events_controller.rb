@@ -6,6 +6,9 @@ class EventsController < ApplicationController
 	end
 	
 	def create
-		respond_with Event.create(params[:event])
+    if Event.energy(params[:event][:user_id]) > 0
+      e = Event.create(params[:event])
+    end
+		render :json => {energy: Event.energy(params[:event][:user_id])}.to_json
 	end
 end

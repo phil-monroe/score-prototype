@@ -3,7 +3,7 @@ var CandidateView = Backbone.View.extend({
   template: window.JST['candidates/show'],
 
   events: {
-    "click":          "fetchModel",
+    "click":          "fetchModel"
   },
 
 	initialize: function() {

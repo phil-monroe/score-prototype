@@ -1,10 +1,14 @@
+<style>
+	.ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
+	</style>
 <% content_for :javascript do %>
   <%= javascript_include_tag 'candidate' %>
 <% end %>
 
 <div id="candidate" data-json="<%= @candidate.to_json %>">
-  <%= @candidate.name %> - <span id="score"><%= @candidate.score %></span>
+  <%= @candidate.name %> - <span id="score"><%= @candidate.score*15 %></span>
 </div>
+<div id="energy" style="width:30%;"></div>
 <ul id="available_events" style="display: block; float: left; width: 40%;">
   loading...
 </ul>

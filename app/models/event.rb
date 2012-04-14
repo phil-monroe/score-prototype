@@ -22,4 +22,8 @@ class Event < ActiveRecord::Base
   def self.total_activity who, pillar, range
     self.by(who).in_pillar(pillar).between(range).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum'] || 0
   end
+
+  def self.energy(candidate_id)
+    (20 - self.where(:user_type => "Candidate", :user_id => candidate_id).where("created_at > ?", CalculationTimeHistory.last.time).count)*5
+  end
 end

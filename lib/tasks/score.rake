@@ -1,3 +1,22 @@
+task :score_server, :time, :simulate do |t, args|
+	time = args[:time].to_i || 30
+	simulate = args[:simulate] || false
+	
+	puts time.inspect
+	while true do
+		Rake::Task['score'].invoke
+		Rake::Task['score'].reenable
+		
+		if simulate
+			puts 'Simulating recruiter events'
+			Rake::Task['random_recruiter_events'].invoke
+			Rake::Task['random_recruiter_events'].reenable
+		end
+		sleep time
+	end
+end
+
+
 task :score, [:use_last_period] => [:environment] do |t, args|
   #Constants that need admin in the final implementations
   MAX_SCORE = 100

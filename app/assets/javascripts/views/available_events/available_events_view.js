@@ -16,7 +16,7 @@ var AvailableEventsView = Backbone.View.extend({
 	},
 
   render: function() {
-    if(window.energy.get('energy') != 0){
+    if(!window.energy || window.energy.get('energy') != 0){
       $(this.el).empty();
   		_.each(this.collection.models, this.appendEntry, this);
     }

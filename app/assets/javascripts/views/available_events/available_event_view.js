@@ -11,7 +11,7 @@ var AvailableEventView = Backbone.View.extend({
 	},
 	
 	submitEvent: function(entry){
-	  if(window.energy.get('energy') != 0){
+	  if(!window.energy || window.energy.get('energy') != 0){
   		var event = new Event({
   			available_event_id: this.model.id,
   			user_id: this.options.user.id,

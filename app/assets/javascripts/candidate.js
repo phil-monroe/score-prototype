@@ -13,7 +13,7 @@ $(function(){
     window.energy.fetch();
 		availableEvents.fetch({data: {user_type: candidate.name}});
     rawScoreHistories.fetch();
-	}, 1000);
+	}, 5000);
 	
 	var cand_view = new CandidateView({model: candidate});
 	var availEventsView = new AvailableEventsView({collection: availableEvents, user: candidate});

@@ -7,5 +7,16 @@ var EnergyView = Backbone.View.extend({
 
   render: function() {
 		$(this.el).progressbar( "value" , this.model.get('energy') );
+    this.disableButtons();
+  },
+  
+  disableButtons: function(){
+    if(this.model.get('energy') == 0){
+      $('button').attr("disabled", "disabled");
+    }else{
+      $('button').removeAttr("disabled");
+    }
+    
+    
   }
 });

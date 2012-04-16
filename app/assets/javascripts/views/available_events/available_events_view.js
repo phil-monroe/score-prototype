@@ -16,8 +16,10 @@ var AvailableEventsView = Backbone.View.extend({
 	},
 
   render: function() {
-		$(this.el).empty();
-		_.each(this.collection.models, this.appendEntry, this);
+    if(window.energy.get('energy') != 0){
+      $(this.el).empty();
+  		_.each(this.collection.models, this.appendEntry, this);
+    }
     return this;
   }
 });

@@ -11,15 +11,22 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
-//= require underscore
-//= require backbone
 //= require jquery.flot
 //= require jquery.flot.stack
+//= require underscore
+//= require backbone
 //= require_tree ../templates/
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views
 //= require_tree ./routers
 //= require active_scaffold
-//= require jquery-ui
+//= require_self
+
+$(function(){
+  window.energy = new Energy({energy:100});
+  window.myScore = Math.random()*20 + 60;
+  
+})

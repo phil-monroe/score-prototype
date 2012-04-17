@@ -1,7 +1,7 @@
 $(function(){
 
   window.myScore = Math.random()*20 + 60;
-  window.energy = new Energy({energy:0});
+  window.energy = new Energy({energy:100});
 	window.candidate = new Candidate($('#candidate').data('json'));
   $('#energy').progressbar();
 	var availableEvents = new AvailableEvents();

@@ -1,6 +1,7 @@
 class RecruitersController < ApplicationController
   def show
     @recruiter = Recruiter.find(params[:id])
+		@candidates = Candidate.all
     respond_to do |format|
 			format.html
 			format.json { render :json => @recruiter }

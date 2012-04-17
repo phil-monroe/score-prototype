@@ -2,9 +2,23 @@
   <%= javascript_include_tag 'recruiter' %>
 <% end %>
 
-<div id="recruiter" data-json="<%= @recruiter.to_json %>">
-  <%= @recruiter.name %>
+<div>
+  <h1>Recruiter: <%= @recruiter.name %></h1>
 </div>
-<ul id="available_events">
-  loading...
-</ul>
+<div class="row">
+  <div id="actions" class="span4">
+    <h3>Actions</h3>
+    <ul id="available_events">
+      loading...
+    </ul>    
+  </div>
+  
+  <div id="candidates" class="span8">
+    <h3>Candidates</h3>
+    <table id="candidates-table" class="table table-striped table-bordered">
+    <% @candidates.each do |candidate| %>
+      <tr><td><%= candidate.name %></td><td><%= Integer(candidate.score*100+60) %></td></tr>
+    <% end %>
+    </table>
+  </div>
+</div>

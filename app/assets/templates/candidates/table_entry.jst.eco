@@ -1,0 +1,1 @@
+<tr><td><%= @candidate.get('name') %></td><td><%= Math.floor(window.myScore + @candidate.get('score')*15) %></td></tr>

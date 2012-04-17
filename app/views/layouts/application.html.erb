@@ -8,10 +8,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="content">
-	
+<div id="header" class="container">
+  <%= image_tag "identified-beta-logo.png" %>
 </div>
-<%= yield %>
+<div id="container" class="container">
+    <%= yield %>
+</div>
 </div>
 </body>
 </html>

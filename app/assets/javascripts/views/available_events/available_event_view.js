@@ -18,7 +18,6 @@ var AvailableEventView = Backbone.View.extend({
   			user_type: this.options.user.name
   			});
   		event.save(null, {success: function(response){
-        console.log(response.attributes.energy);
         window.energy.set({energy:response.attributes.energy});}});
       window.dispatcher.trigger("event");
 	  }

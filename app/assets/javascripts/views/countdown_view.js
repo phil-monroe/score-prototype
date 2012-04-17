@@ -16,6 +16,7 @@ var CountdownView = Backbone.View.extend({
 	},
 
   render: function() {
+    if(this.current_time == -1) this.current_time = 0;
     $(this.el).html("Estimated time left: " + this.current_time--);
   }
 });

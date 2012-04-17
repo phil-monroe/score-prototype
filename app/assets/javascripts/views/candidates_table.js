@@ -14,7 +14,6 @@ var CandidatesTableView = Backbone.View.extend({
   render: function() {
 		$(this.el).empty();
 		_.each(this.collection.models, this.appendEntry, this);
-		console.log("rendered")
   },
   
   appendEntry: function(model){

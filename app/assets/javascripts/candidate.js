@@ -10,11 +10,11 @@ $(function(){
 
 	// Poll every 10 seconds to keep the candidate model up-to-date.
 	setInterval(function() {
+	  timerView.render();
 	  candidate.fetch();
     window.energy.fetch();
 		availableEvents.fetch({data: {user_type: candidate.name}});
     rawScoreHistories.fetch();
-    timerView.render();
 	}, 1000);
 	
 	var cand_view = new CandidateView({model: candidate});

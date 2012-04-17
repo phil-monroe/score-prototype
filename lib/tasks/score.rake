@@ -4,15 +4,20 @@ task :score_server, :time, :simulate do |t, args|
 	
 	puts time.inspect
 	while true do
-		Rake::Task['score'].invoke
-		Rake::Task['score'].reenable
+		begin
+			Rake::Task['score'].invoke
+			Rake::Task['score'].reenable
 		
-		if simulate
-			puts 'Simulating recruiter events'
-			Rake::Task['random_recruiter_events'].invoke
-			Rake::Task['random_recruiter_events'].reenable
+			if simulate
+				puts 'Simulating recruiter events'
+				Rake::Task['random_recruiter_events'].invoke
+				Rake::Task['random_recruiter_events'].reenable
+			end
+			sleep time
+		rescue Exception => e
+			puts "FAIl !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+			puts e.message
 		end
-		sleep time
 	end
 end
 

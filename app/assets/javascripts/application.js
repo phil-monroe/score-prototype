@@ -28,5 +28,6 @@
 $(function(){
   window.energy = new Energy({energy:100});
   window.myScore = Math.random()*20 + 60;
+  window.dispatcher = _.clone(Backbone.Events);
   
 })

@@ -1,7 +1,7 @@
 class CandidatesController < ApplicationController
 	def index
 		respond_to do |format|
-			format.json { render :json => Candidate.order('score ASC').all }
+			format.json { render :json => Candidate.order('score DESC').all }
 		end
 	end
   def show

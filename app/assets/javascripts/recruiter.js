@@ -9,5 +9,6 @@ $(function(){
 		candidates.fetch();
 	}, 10000);
 	
+	var candidatesTable = new CandidatesTableView({collection: candidates})
 	var availEventsView = new AvailableEventsView({collection: availableEvents, user: recruiter});
 });

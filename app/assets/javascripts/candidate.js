@@ -26,5 +26,5 @@ $(function(){
   energyview.render();
   cand_view.render();
   rawScoreHistories.fetch();
-
+  $('#myModal').modal('toggle')
 });

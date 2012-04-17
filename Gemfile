@@ -17,3 +17,5 @@ gem 'backbone-on-rails'
 gem "flot-rails"
 gem "active_scaffold"
 gem "twitter-bootstrap-rails"
+gem "foreman"
+gem "unicorn"

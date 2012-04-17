@@ -17,6 +17,9 @@ task :score_server, :time, :simulate do |t, args|
 		rescue Exception => e
 			puts "FAIl !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 			puts e.message
+			if e.is_a?(Interrupt)
+				exit()
+			end
 		end
 	end
 end

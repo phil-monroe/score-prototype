@@ -6,6 +6,7 @@ ScoreProto::Application.routes.draw do
   resources :recruiters
 	resources :available_events
   resources :events
+	resources :calculation_time_history
 
   namespace :admin do
     resources :available_events do as_routes end

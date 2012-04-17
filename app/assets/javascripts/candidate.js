@@ -6,6 +6,7 @@ $(function(){
   $('#energy').progressbar();
 	var availableEvents = new AvailableEvents();
   var rawScoreHistories = new RawScoreHistories([], {candidate_id: candidate.id});
+  var timerView = new CountdownView();
 
 	// Poll every 10 seconds to keep the candidate model up-to-date.
 	setInterval(function() {
@@ -13,11 +14,11 @@ $(function(){
     window.energy.fetch();
 		availableEvents.fetch({data: {user_type: candidate.name}});
     rawScoreHistories.fetch();
-	}, 5000);
+    timerView.render();
+	}, 1000);
 	
 	var cand_view = new CandidateView({model: candidate});
 	var availEventsView = new AvailableEventsView({collection: availableEvents, user: candidate});
-
   var rawsocreview = new RawScoreHistoryView({collection: rawScoreHistories});
   var energyview = new EnergyView({model: window.energy});
   energyview.render();

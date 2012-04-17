@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   scope :between, lambda{|range| where(:created_at => (range.first..range.last))}
 
   def self.total_activity who, pillar, range
-    self.by(who).in_pillar(pillar).between(range).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum'] || 0
+    self.by(who).in_pillar(pillar).between(range).select("sum(available_events.multiplier) as sum").map(&:attributes).first['sum'].to_i || 0
   end
 
   def self.energy(candidate_id)

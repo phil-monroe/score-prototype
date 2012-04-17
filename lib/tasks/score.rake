@@ -5,14 +5,14 @@ task :score_server, :time, :simulate do |t, args|
 	puts time.inspect
 	while true do
 		begin
-			Rake::Task['score'].invoke
-			Rake::Task['score'].reenable
-		
 			if simulate
 				puts 'Simulating recruiter events'
 				Rake::Task['random_recruiter_events'].invoke
 				Rake::Task['random_recruiter_events'].reenable
 			end
+			
+			Rake::Task['score'].invoke
+			Rake::Task['score'].reenable
 			sleep time
 		rescue Exception => e
 			puts "FAIl !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -91,6 +91,7 @@ def calc_pillar_wrights range
   counts = {}.tap do |hash|
     Pillar.all.each do |pillar|
       hash[pillar.name] = Event.total_activity(Recruiter, pillar, range) if pillar.weight.nil?
+			puts hash[pillar.name].inspect
     end
   end
   puts "recruiter counts = #{counts}"
@@ -110,7 +111,7 @@ def calc_pillar_wrights range
   # Note: if recruiters have had no activity during the period the distribution is equal
   weights.tap do |hash|
     Pillar.all.each do |pillar|
-      hash[pillar.name] = (tot > 0 ? counts[pillar.name]*total_weight/tot : total_weight/dynamic_pillars) if pillar.weight.nil?
+      hash[pillar.name] = (tot.to_f > 0 ? counts[pillar.name]*total_weight/tot : total_weight/dynamic_pillars) if pillar.weight.nil?
       hash[pillar.name] /= 100.0
     end
   end

@@ -12,7 +12,8 @@ var CountdownView = Backbone.View.extend({
 	},
 	
 	update: function(){
-      this.current_time = this.calc_time.get('interval') -1;
+      this.current_time = this.calc_time.get('interval');
+      this.render();
 	},
 
   render: function() {

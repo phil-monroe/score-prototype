@@ -27,7 +27,7 @@ li{
 }
 
 button{
-  width: 200px;
+  width: 100%;
 }
 
 #actions{
@@ -36,3 +36,16 @@ button{
 #candidates{  
 }
 .ui-progressbar-value { background-image: url('pbar-ani.gif'); }
+
+#score{
+  float: right;
+  background-color: lightgrey;
+  padding:.5em;
+  border: thin solid darkgrey;
+}
+
+#score-history{
+  background: blue;
+  width:100%;
+  height:200px;
+}

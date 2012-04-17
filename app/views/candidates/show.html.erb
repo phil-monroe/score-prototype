@@ -2,13 +2,33 @@
   <%= javascript_include_tag 'candidate' %>
 <% end %>
 
-<div id="candidate" data-json="<%= @candidate.to_json %>">
-  <%= @candidate.name %> - <span id="score"><%= @candidate.score*15 %></span>
+<div class="row">
+  <div id="candidate" class="span12" data-json="<%= @candidate.to_json %>">
+    loading...
+  </div>  
 </div>
-<div id="energy" style="width:30%;"></div>
-<ul id="available_events" style="display: block; float: left; width: 40%;">
-  loading...
-</ul>
 
-<ul id="score-history" style="display: block; float: left; width: 40%;"></ul>
-<div id="avg-score-history" style="width:600px;height:300px; clear:both;"></div>
+
+<div class="row">
+  <div class="span6">
+    <h3>Events</h3>
+    <div id="energy"></div>
+    <ul id="available_events">
+      loading...
+    </ul>
+  </div>
+  
+  <div class="span6">
+    <h3>Contibutions</h3>
+    <ul id="score-history"></ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div id="avg-score-history" style="width:100%;height:300px; clear:both;"></div>
+  </div>
+  
+</div>
+
+

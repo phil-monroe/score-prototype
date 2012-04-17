@@ -1,1 +1,1 @@
- <%= @candidate.get('name') %> - <span id="score"><%= Math.floor(window.myScore + @candidate.get('score')*15) %></span>
+ <h1><%= @candidate.get('name') %> <span id="score"><%= Math.floor(window.myScore + @candidate.get('score')*15) %></span></h1>

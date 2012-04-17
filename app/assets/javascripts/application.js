@@ -24,6 +24,8 @@
 //= require_tree ./routers
 //= require active_scaffold
 //= require_self
+//= require twitter/bootstrap
+
 
 $(function(){
   window.energy = new Energy({energy:100});

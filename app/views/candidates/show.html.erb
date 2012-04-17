@@ -2,11 +2,35 @@
   <%= javascript_include_tag 'candidate' %>
 <% end %>
 
+<% content_for :header do %>
+  <a class="btn" data-toggle="modal" href="#myModal" style="float:right;">How to play</a>
+
+  <div class="modal" id="myModal" style="display: none; ">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>How to play</h3>
+    </div>
+    <div class="modal-body">
+      The objective of the game is to Maximize your score at all times!</br>
+      - Your score goes from 0 to 100 and is subdivided into pillars.</br>
+      - Each pillar has a different % of the total score, which is not revealed. These percentages could change at any moment.</br>
+      - Each pillar's score is increased if you perform an action related to that pillar (for example, performing a "Work" action increases your Work pillar score for that round.</br>
+      - You have a limited number of actions to perform per round. At the end of every round (10 seconds long), your energy bar refills.</br>
+      - The contributions window lets you know how much each pillar contributed to your score in the previous round.</br>
+      - Use the information in the contributions window to decide where to spend your energy in the next round!</br>  </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+  </div>
+<% end %>
+
+
 <div class="row">
   <div id="candidate" class="span12" data-json="<%= @candidate.to_json %>">
     loading...
-  </div>  
+  </div>
 </div>
+
 
 
 <div class="row">

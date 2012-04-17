@@ -36,7 +36,11 @@ $(function() {
       var keys = _.keys(pillars);
       index = 1;  
       var ret = _.map(keys, function(key){
-        return [index++ -.25, pillars[key]];
+        var val = 0;
+        if(pillars[key] >= .05)
+          val = pillars[key];
+          
+        return [index++ -.25, val];
       });
       return [{ data: ret,
                 bars: { show: true, 

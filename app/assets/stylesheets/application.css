@@ -52,3 +52,10 @@ button{
   color: darkgrey;
   float: right;
 }
+
+ul#fancy li:before {
+	content: "\002D \0020";
+	}
+ul#fancy li {
+	padding: .5em;
+	}

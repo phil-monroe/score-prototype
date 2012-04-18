@@ -31,13 +31,12 @@ $(function() {
     },
     
     last_pillar_contriburtions: function(){
-      var len = this.models.length;
-      var pillars = this.models[len-1].get('pillars');
+      var pillars = this.models[0].get('pillars');
       var keys = _.keys(pillars);
       index = 1;  
       var ret = _.map(keys, function(key){
-        var val = 0;
-        if(pillars[key] >= .05)
+        var val = 0.025;
+        if(pillars[key] >=  0.025)
           val = pillars[key];
           
         return [index++ -.25, val];
@@ -48,8 +47,7 @@ $(function() {
     },
     
     last_pillar_plot_options: function(){
-      var len = this.models.length;
-      var pillars = this.models[len-1].get('pillars');
+      var pillars = this.models[0].get('pillars');
       var keys = _.keys(pillars);
       index = 1;  
       var ret = _.map(keys, function(key){

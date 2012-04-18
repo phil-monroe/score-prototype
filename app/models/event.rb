@@ -24,6 +24,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.energy(candidate_id)
-    (20 - self.where(:user_type => "Candidate", :user_id => candidate_id).where("created_at > ?", CalculationTimeHistory.last.time).count)*5
+		steps = 15
+    (steps - self.where(:user_type => "Candidate", :user_id => candidate_id).where("created_at > ?", CalculationTimeHistory.last.time).count)*100/steps
   end
 end

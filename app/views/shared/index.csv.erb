@@ -1,0 +1,4 @@
+<%= @models.first.class.csv_header %>
+<% @models.each do |m| %>
+<%= m.to_csv %>
+<% end %>

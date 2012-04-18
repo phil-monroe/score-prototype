@@ -1,7 +1,19 @@
 class RawScoreHistoriesController < ApplicationController
-  respond_to :json
-
+	
 	def index
-    respond_with Candidate.find(params[:candidate_id]).raw_score_histories.order('updated_at DESC').limit(20), :status => :ok
+		if params[:candidate_id]
+			respond_to do |format|
+				format.json {
+						render :json => Candidate.find(params[:candidate_id]).raw_score_histories.order('updated_at DESC').limit(20), :status => :ok
+				}
+			end
+		else
+			respond_to do |format|
+				format.csv	{ 
+					@models = RawScoreHistory.all
+					render '/shared/index'
+				}
+			end	
+		end
 	end
 end

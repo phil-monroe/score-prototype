@@ -1,11 +1,16 @@
 class EventsController < ApplicationController
-  respond_to :json
-
 	def index
-		respond_with Event.all
+		@events = Event.all
+		respond_to do |format|
+			format.json {render :json => @events}
+			format.csv	{ 
+				@models = @events
+				render '/shared/index'
+			}		
+		end
 	end
 	
-	def create
+	def create		
     if Event.energy(params[:event][:user_id]) > 0
       e = Event.create(params[:event])
     end

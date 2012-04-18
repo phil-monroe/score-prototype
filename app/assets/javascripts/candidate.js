@@ -12,10 +12,13 @@ $(function(){
 	setInterval(function() {
 	  timerView.render();
     window.energy.fetch();
-    rawScoreHistories.fetch();
     candidate.fetch();
 	}, 1000);
 	
+	setInterval(function() {
+    rawScoreHistories.fetch();
+  }, 250);
+  
 	setInterval(function() {
 		availableEvents.fetch({data: {user_type: candidate.name}});
 	}, 5000);

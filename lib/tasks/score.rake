@@ -1,3 +1,4 @@
+desc "Computes the scores on a regular interval."
 task :score_server, :time, :simulate do |t, args|
 	time = args[:time].to_i || 30
 	simulate = args[:simulate] || false

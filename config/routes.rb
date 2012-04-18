@@ -1,4 +1,5 @@
 ScoreProto::Application.routes.draw do
+	match 'score_history' => 'raw_score_histories#index'
   resources :candidates do
     resources :raw_score_histories
     resources :energy

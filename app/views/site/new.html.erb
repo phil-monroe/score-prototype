@@ -1,9 +1,26 @@
-Welcome. 
+<div style="height:25px">
+  
+</div>
+<div class="row">
+  <div class="span4 offset1">
+    <b>Welcome to the Dynamic Score Prototype!</b>
 
-Please sign in.
+    Unless otherwise directed, please select "Candidate" from the drop-down menu and type your name. Click "Submit" to play the game.
+  </div>
+  
+  <div class="offset2 span4">
+    <%= form_tag login_path, class: "well" do -%>
+      
+      <%= select_tag :user_type, options_for_select(["Candidate", "Recruiter"]), :include_blank => false, class: "fill-input"  %>
+      <%= text_field_tag :name, "", class: "fill-input" %>
+      <br><%= submit_tag "Login", class: "btn" %>
+    <% end -%>
+  </div>
+</div>
 
-<%= form_tag login_path do -%>
-	<%= select_tag :user_type, options_for_select(["Candidate", "Recruiter"]), :include_blank => false  %>
-	<%= text_field_tag :name %>
-	<%= submit_tag :submit %>
-<% end -%>
+
+<div class="row">
+  <div class="offset4 span4 center-text">
+    Brought to you by team Rolling Thunder.
+  </div>
+</div>

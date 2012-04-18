@@ -59,3 +59,14 @@ ul#fancy li:before {
 ul#fancy li {
 	padding: .5em;
 	}
+	
+.fill-input{
+  width: 250px;
+}
+select.fill-input{
+  width: 260px;
+}
+
+.center-text{
+  text-align: center;
+}

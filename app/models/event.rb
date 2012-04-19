@@ -27,4 +27,20 @@ class Event < ActiveRecord::Base
 		steps = 15
     (steps - self.where(:user_type => "Candidate", :user_id => candidate_id).where("created_at > ?", CalculationTimeHistory.last.time).count)*100/steps
   end
+
+	def self.pillar_counts
+		times = CalculationTimeHistory.last(2)
+		events = self.where(:user_type => "Candidate").where("created_at > ?", times.first.time).where("created_at < ?", times.last.time)
+		array = Pillar.all.collect{|p|
+			count = events.where("available_event_id IN (?)", p.available_events.collect{|e| e.id}).count
+			{p.name => count}
+		}
+		hash = {}
+		array.each do |h|
+			hash.merge! h
+		end
+		hash
+	end
+	
 end
+

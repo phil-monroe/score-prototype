@@ -48,10 +48,14 @@ $(function() {
     
     last_pillar_plot_options: function(){
       var pillars = this.models[0].get('pillars');
+      var pillar_counts = this.models[0].get('pillar_counts');
       var keys = _.keys(pillars);
       index = 1;  
       var ret = _.map(keys, function(key){
-        return [index++, key];
+        var display = key;
+        if(pillar_counts[key] != undefined)
+          display += ' (' +  pillar_counts[key] + ')';
+        return [index++, display];
       });
       return {
               // series: {bars: {show: true, barWidth: 0.9, align: 'center',},},

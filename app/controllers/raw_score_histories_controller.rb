@@ -4,7 +4,9 @@ class RawScoreHistoriesController < ApplicationController
 		if params[:candidate_id]
 			respond_to do |format|
 				format.json {
-						render :json => Candidate.find(params[:candidate_id]).raw_score_histories.order('updated_at DESC').limit(20), :status => :ok
+					hists = Candidate.find(params[:candidate_id]).raw_score_histories.order('updated_at DESC').limit(20).collect{|h| h.attributes}
+					hists[0][:pillar_counts] = Rails.cache.read(:show_counts) ? Event.pillar_counts : {}
+						render :json => hists, :status => :ok
 				}
 			end
 		else

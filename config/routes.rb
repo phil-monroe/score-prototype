@@ -12,6 +12,7 @@ ScoreProto::Application.routes.draw do
   namespace :admin do
     resources :available_events do as_routes end
     resources :pillars do as_routes end
+		match "settings" => 'settings#index'
   end
 
   match 'login' => 'site#create'

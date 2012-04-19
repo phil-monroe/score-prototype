@@ -1,0 +1,7 @@
+<% if Rails.cache.read(:show_counts)%>
+  Showing counts<br>
+  <%= button_to "Stop Showing", admin_settings_path(:show_counts => false) %>
+<% else %>
+  Not showing counts
+  <%= button_to "Start Showing", admin_settings_path(:show_counts => true) %>
+<% end %>
